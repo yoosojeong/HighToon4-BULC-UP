@@ -1,0 +1,49 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/postDetail.css' %}" />
+    </head>
+    <body>
+        <div id="nav">
+            <a href="/home"><img src="{% static 'images/log.png' %}" id="log" src="log"/></a>
+        </div>
+        <div id="text">
+            <p>
+                <p class="langg">{{ postBox.subjsect }}</p>
+                <h1 id="head"> {{ postBox.title }} </h1>
+                <span class="langg">작성자 </span>| {{ postBox.creator }}
+            </p>
+            <p class="message">
+                {{ postBox.message }}
+            </p>
+            <p class="langg">자격조건</p>
+            <p class="message">
+                {{ postBox.qualification }}
+            </p>
+            <p class="langg">예정 인원</p>
+            <p class="message">
+                {{ postBox.personnel }}
+            </p>
+            
+            <p class="langg">장소</p>
+            <p class="message">
+                {{ postBox.location }}
+            </p>
+            <p class="langg">예정 기간</p>
+            <p class="message">
+                {{  postBox.term }}
+            </p>
+            <p class="langg">예정 시간</p>
+            <p class="message">
+                {{ postBox.time }}
+            </p>
+            <p>
+            <form method = "delete"> 
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class = "btn btn-primary" type = "submit" > 삭제 </ button>  
+            </form>
+            </p>
+        </div>
+    </body>
+</html>

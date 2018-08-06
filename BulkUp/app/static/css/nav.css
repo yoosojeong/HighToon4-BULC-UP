@@ -1,0 +1,15 @@
+#nav{
+    width: 100%;
+    border-bottom: 1px solid #bcbcbc;
+    background-color: #ffffff;
+  }
+
+#log {
+  padding-left: 150px;
+  width: 125px;
+  margin-left: 30px;
+}
+
+body {
+  margin: 0 0 0 0;  
+}

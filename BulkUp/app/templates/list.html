@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<title>리스트</title>
+<div id="nav">
+    <a href="/home"><img src="{% static 'images/log.png' %}" id="log" src="log" height="20%" width="20%" style="margin-left: auto; margin-right: auto; display: block;"/></a>
+</div>
+</head>
+<body>
+<div>
+    <h1 id="head" style= "margin-left: 13%; margin-bottom: 20px;">모집 중인 스터디</h1>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td><B>주제</B></td>
+            <td><B>제목</B></td>
+            <td><B>작성자</B></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for postingData in postingDatas %}
+        <tr>
+            <td>{{ postingData.subjsect }}</td>
+            <td><a href="/home/list/{{ postingData.id }}/">{{ postingData.title }}</a></td>
+            <td>{{candidate.introduction}}</td>
+            <td>{{ postingData.creator }}</td>
+        </tr>
+        {% endfor %}
+        <tbody>
+    </table>
+</body>

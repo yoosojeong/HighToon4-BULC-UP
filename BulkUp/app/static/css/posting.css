@@ -1,0 +1,53 @@
+@font-face {
+  font-family: 'dream';
+  src: url("../fonts/dream.otf") format("opentype");
+  font-style: normal;
+}
+.langg {
+  font-family: dream;
+}
+
+#text {
+    margin: 0 auto;
+    max-width: 800px;
+    overflow: hidden;
+}
+
+#title {
+    font-size: 400%;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+  }
+
+.textarea {
+    font-size: 20;
+    width: 100%;
+    height: 20%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border: 1px solid black;
+    padding: 30px;
+}
+
+.textarea2 {
+    font-size: 20;
+    width: 100%;
+    height: 5%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border: 1px solid black;
+    padding: 30px;
+}
+
+#btn {
+    background-color: black;
+    border: none;
+    color: white;
+    font-size: 170%;
+    float: right;
+}

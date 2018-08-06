@@ -1,0 +1,38 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/posting.css' %}" />
+    </head>
+    <body>
+        <div id="text">
+            <p>
+                <input id="title" placeholder="Title">
+            </p>
+            <p>
+                <h2>글 작성</h2>
+                <textarea class="textarea" placeholder="Ex) 자세한 내용"></textarea>
+            </p>
+            <p>
+                <h2>자격 조건</h2>
+                <textarea class="textarea" placeholder="Ex) 파이썬 기초를 아는 사람"""></textarea>
+            </p>
+            <p>
+                <h2>예정 인원</h2>
+                <textarea class="textarea2" placeholder="Ex) 5명 이하"></textarea>
+            </p>
+            <p>
+                <h2>장소</h2>
+                <textarea class="textarea2" placeholder="Ex) 서울 공덕창업허브"></textarea>
+            </p>
+            <p>
+                <h2>예정 기간</h2>
+                <textarea class="textarea2" placeholder="Ex) 장기 스터디"></textarea>
+            </p>
+            <p>
+                <h2>예정 시간</h2>
+                <textarea class="textarea2" placeholder="Ex) 매주 월,화 오후6시~8시"></textarea>
+            </p>
+            <a href="/list/"><button id="btn">Submit</button></a>
+        </div>
+    </body>
+</html>

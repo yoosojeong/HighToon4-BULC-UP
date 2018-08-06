@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}" />
+    <meta charset="utf-8">
+    <title>회원가입</title>
+  </head>
+  <body>
+    <div id="nav">
+      <a href="/home"><img src="{% static 'images/log.png' %}" id="log" src="log"/></a>
+    </div>
+    <div id='frame'>
+      <center><h1>회원가입</h1></center>
+      <div id="pro">
+        <label for="profile">프로필 사진</label>
+        <input type="file" id="profile">
+      </div>
+      <div>
+          <center><input type="text" id='nick' class="input" placeholder="NickName"></center>
+      </div>
+      <div>
+        <center><input type="email" id="email" class="input" placeholder="Email"></center>
+      </div>
+      <div>
+        <center><input type="password" id='password' class="input" placeholder="password"></center>
+      </div>
+      <div>
+        <center><input type="password" id='password2' class="input" placeholder="CheckPassword"></center>
+      </div>
+      <div id="help">
+        <div class="space">성별</div><select><option id="gen">Male</option><option id="Girl">Female</option></select>
+        <div class="space">나이</div><div id='aage'><input type="number" id="age" min="1" max="100" value="1"></div>
+      </div>
+      <br>
+      <div>
+        <center><input type="text" id="intro" placeholder="Introduce yourself">
+      </div>
+      <div>
+        <center><a href="/posting/"><input type="submit" id='submit' name="전송" value="회원가입"></center></a>
+      </div>
+    </div>
+  </body>
+</html>

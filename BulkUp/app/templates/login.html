@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+    <meta charset="utf-8">
+    <title>로그인</title>
+  </head>
+  <body>
+    <div id="nav">
+      <a href="/home"><img src="{% static 'images/log.png' %}" id="log" src="log"/></a>
+    </div>
+    <div id='frame'>
+      <p>로그인</p>
+      <div>
+        <center><input type="text" id='id' name="id" placeholder="Email address..."></center>
+      </div>
+      <div>
+        <center><input type="password" id='password' name="password" placeholder="Password"></center>
+      </div>
+      <div>
+        <center><input type="submit" id='submit' name="전송" value="Log in"></center>
+      </div>
+      <div id="footer">
+        <div>
+          <center><button id="input" type="button" name="회원가입"><a href="register/">아직 회원이 아닌가요?</a></button></center>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'dream';
+  src: url("../fonts/dream.otf") format("opentype");
+  font-style: normal;
+}
+.langg {
+  font-family: dream;
+}
+.message {
+    background-color: #efeded;
+    font-size: 20px;
+    padding: 19px;
+}
+.btns {
+    text-align: center;
+    border: none;
+    padding: 10px 10px;
+    font-size: 15px;
+}
+#nav{
+    width: 100%;
+    border-bottom: 1px solid #bcbcbc;
+    background-color: #ffffff;
+  }
+
+#log {
+  padding-left: 150px;
+  width: 125px;
+  margin-left: 30px;
+}
+
+body {
+  margin: 0 0 0 0;  
+}
+
+#text{
+  margin: 0 auto;
+  max-width: 900px;
+  overflow: hidden;
+}
