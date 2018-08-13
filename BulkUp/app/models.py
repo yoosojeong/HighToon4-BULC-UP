@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 class TimeStampedModel(models.Model):
@@ -10,22 +10,27 @@ class TimeStampedModel(models.Model):
     class Meta:
         abstract = True
 
-class UserBox(AbstractUser):
+class Profile(models.Model):
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
 
     GENDER_CHOICES = {
-        ('male', 'Male'),
-        ('female', 'Female'),
-        ('not-specified', 'Not specified')
+        ('male', 'male'),
+        ('female', 'female'),
+        ('not-specified', 'not-specified')
     }
 
-    profile_image = models.ImageField(null=True)
+    profile_image = models.ImageField(upload_to="media/",null=True, blank=True)
     name = models.CharField(_('Name of User'), blank=True, max_length=255)
     gender = models.CharField(max_length=80, choices=GENDER_CHOICES, null=True)
     bio = models.TextField(null=True, max_length=150)
     age = models.IntegerField(null=True)
 
     def __str__(self):
-        return self.name
+        return '{}'.format(self.name)
 
 class PostingData(TimeStampedModel):
     
@@ -37,7 +42,7 @@ class PostingData(TimeStampedModel):
 
     subjsect = models.TextField() #주제 / 언어
     title = models.TextField(max_length=80) #제목
-    creator = models.ForeignKey(UserBox, on_delete=models.CASCADE, null=True, related_name='creator') #주체자
+    creator = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, related_name='creator') #주체자
     message = models.TextField(max_length=500) #내용
     qualification = models.TextField(max_length=500) #참가자격
     personnel = models.TextField(max_length=10) #모집 인원수

@@ -1,43 +1,31 @@
 from django.contrib import admin
 from django import forms
-from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
+from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from .models import UserBox
 from . import models
 
+@admin.register(models.Profile)
+class ProfileAdmin(admin.ModelAdmin):
 
-class MyUserChangeForm(UserChangeForm):
-    class Meta(UserChangeForm.Meta):
-        model = UserBox
+    model = models.Profile
+    can_delete = False
+    verbose_name_plural = 'profile'
 
+    list_display = (
+        'user', 
+        'profile_image', 
+        'name', 
+        'gender', 
+        'bio', 
+        'age',
+    )
 
-class MyUserCreationForm(UserCreationForm):
+class UserAdmin(UserAdmin):
+    inlines = [
+        ProfileAdmin
+    ]
 
-    error_message = UserCreationForm.error_messages.update({
-        'duplicate_username': 'This username has already been taken.'
-    })
-
-    class Meta(UserCreationForm.Meta):
-        model = UserBox
-
-    def clean_username(self):
-        username = self.cleaned_data["username"]
-        try:
-            UserBox.objects.get(username=username)
-        except UserBox.DoesNotExist:
-            return username
-        raise forms.ValidationError(self.error_messages['duplicate_username'])
-
-
-@admin.register(UserBox)
-class MyUserAdmin(AuthUserAdmin):
-    form = MyUserChangeForm
-    add_form = MyUserCreationForm
-    fieldsets = (
-            ('User Profile', {'fields': ('profile_image', 'name', 'gender', 'age','bio')}),
-    ) + AuthUserAdmin.fieldsets
-    list_display = ('username', 'name', 'is_superuser')
-    search_fields = ['name']
+# Re-register UserAdmin
 
 @admin.register(models.PostingData)
 class PostingAdmin(admin.ModelAdmin):

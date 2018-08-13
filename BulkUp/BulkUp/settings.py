@@ -121,10 +121,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'app.UserBox'
+AUTH_USER_MODEL = 'auth.User'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/mnt/d/sjyoo/Study/BulkUp/BulkUp/app/static/'
 ]
 
+LOGIN_REDIRECT_URL = '/app/'
+
+LOGIN_URL = '/home/login/'
+
+LOGIN_REDIRECT_URL = '/home/profile/'
+
+LOGOUT_REDIRECT_URL = '/home/'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

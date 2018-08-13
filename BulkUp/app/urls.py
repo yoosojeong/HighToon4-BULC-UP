@@ -1,5 +1,10 @@
 from django.conf.urls import url
+from django.contrib.auth import views
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
+
+app_name = 'app'
 
 urlpatterns = [
     url(
@@ -8,37 +13,27 @@ urlpatterns = [
         name='home',
     ),
     url(
-        regex=r'^home/login/$',
-        view=views.Login.as_view(),
-        name='login',
-    ),
-    url(
-        regex=r'^home/register/$',
-        view=views.Register.as_view(),
-        name='register',
-    ),
-        url(
-        regex=r'^home/login/register/$',
-        view=views.Register.as_view(),
-        name='register',
-    ),
-    url(
         regex=r'^home/posting/$',
         view=views.Posting.as_view(),
         name='posting',
     ),
-        url(
+    url(
         regex=r'^posting/$',
         view=views.Posting.as_view(),
         name='posting',
     ),
     url(
-        regex=r'^home/list/$',
-        view=views.List.as_view(),
-        name='post_list',
+        regex=r'^home/profile/$',
+        view=views.Profile.as_view(),
+        name='profile',
     ),
     url(
-        regex=r'^list/$',
+        regex=r'^home/signup/$',
+        view=views.Signup.as_view(),
+        name='signup',
+    ),
+    url(
+        regex=r'^home/list/$',
         view=views.List.as_view(),
         name='post_list',
     ),
@@ -47,9 +42,11 @@ urlpatterns = [
         view=views.PostDetail.as_view(),
         name='post_detail',
     ),
-    url(
-        regex=r'^(?P<username>\w+)/password/$',
-        view=views.ChangePassword.as_view(),
-        name='Change'
-    ),
-]
+    # url(
+    #     regex=r'^accounts/login/done$',
+    #     view=views.ChangePassword.as_view(),
+    #     name='create_user_done'
+    # ),
+] 
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

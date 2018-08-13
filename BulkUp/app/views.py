@@ -3,21 +3,38 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import models
+from .forms import LoginForm
+from .forms import SignupForm
+from .forms import PostingDataForm
 
 class Home(APIView):
     def get(self, request, format=None):
 
         return render(request, "home.html", {})
 
-class Login(APIView):
+class Profile(APIView):     
+    def get(self, request, format=None):
+        
+        return render(request, "profile.html", {})
+        
+class Signup(APIView):
+    
+    def post(self, request, format=None):
+        
+        form = SignupForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            
+            SignupForm(request.FILES['profile_image'])
+        
+        return Response(status=status.HTTP_201_CREATED)
+
     def get(self, request, format=None):
 
-        return render(request, "login.html", {})
+        form = SignupForm()
 
-class Register(APIView):
-    def get(self, request, format=None):
-
-        return render(request, "register.html", {})
+        return render(request, "signup_form.html", {'form': form})
 
 class List(APIView):
     def get(self, request, format=None):
@@ -27,9 +44,28 @@ class List(APIView):
         return render(request, "list.html", context)
 
 class Posting(APIView):
-        def get(self, request, format=None):
+            
+    def post(self, request, format=None):
 
-            return render(request, "posting.html", {})
+        user = request.user
+
+        form = PostingDataForm(user, request.POST)
+
+        if form.is_valid():
+            form.save()
+
+        print(form.data)
+        print(form.errors)
+        
+        return Response(status=status.HTTP_201_CREATED)
+
+    def get(self, request, format=None):
+
+        user = request.user
+
+        form = PostingDataForm(user)
+
+        return render(request, "posting.html", {'form': form})
 
 class PostDetail(APIView):
 
@@ -73,17 +109,13 @@ class PostDetail(APIView):
 
         data=request.data
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
-        # models.postBox(data[]).save()        
+        return Response(status=status.HTTP_204_NO_CONTENT)       
 
     def delete(self, request, post_id, format=None):
-        
-        print(request.user)
 
-        print(post_id)
-
+        print("HELLO")
         user = request.user 
-        
+
         postBox = self.find_own_post(post_id, user)
 
         if postBox is None:
