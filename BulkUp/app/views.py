@@ -54,9 +54,6 @@ class Posting(APIView):
         if form.is_valid():
             form.save()
 
-        print(form.data)
-        print(form.errors)
-        
         return Response(status=status.HTTP_201_CREATED)
 
     def get(self, request, format=None):
@@ -78,13 +75,21 @@ class PostDetail(APIView):
         except models.PostingData.DoesNotExist:
             return None
     
+        except models.Profile.DoesNotExist:
+            return None
+
     def find_own_post(self, post_id, user):
-        
+   
+        creator = models.Profile.objects.get(name=user)
+
         try:
-            postBox = models.PostingData.objects.get(id=post_id, creator=user)
+            postBox = models.PostingData.objects.filter(id=post_id, creator=creator)
             return postBox
 
         except models.PostingData.DoesNotExist:
+            return None
+
+        except models.Profile.DoesNotExist:
             return None
 
     def get(self, request, post_id, format=None):
@@ -107,13 +112,16 @@ class PostDetail(APIView):
 
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-        data=request.data
+        if request.data == None:
+    
+             return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        postBox.update(**request.data)
 
         return Response(status=status.HTTP_204_NO_CONTENT)       
 
     def delete(self, request, post_id, format=None):
 
-        print("HELLO")
         user = request.user 
 
         postBox = self.find_own_post(post_id, user)
@@ -125,6 +133,7 @@ class PostDetail(APIView):
         postBox.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class ChangePassword(APIView):
 

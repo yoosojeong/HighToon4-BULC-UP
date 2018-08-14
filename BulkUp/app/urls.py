@@ -38,6 +38,11 @@ urlpatterns = [
         name='post_list',
     ),
     url(
+        regex=r'^home/list/delete/(?P<post_id>[0-9]+)/$',
+        view=views.PostDetail.as_view(),
+        name='post_detail',
+    ),
+    url(
         regex=r'^home/list/(?P<post_id>[0-9]+)/$',
         view=views.PostDetail.as_view(),
         name='post_detail',
