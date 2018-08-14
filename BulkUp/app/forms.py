@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Profile
 from .models import PostingData
+from .models import SearchData
 
 # User = get_user_model()
 
@@ -81,3 +82,12 @@ class PostingDataForm(forms.ModelForm):
         model = PostingData
 
         fields = ('subjsect', 'title', 'creator', 'message', 'qualification', 'personnel', 'location', 'time', 'term',)
+
+class SearchForm(forms.ModelForm): 
+
+    word = forms.CharField(required=True)
+
+    class Meta:
+        model = SearchData
+
+        fields = ('word',)

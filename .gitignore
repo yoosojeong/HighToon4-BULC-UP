@@ -3,3 +3,4 @@ BulkUp/BulkUp/__pycache__/
 BulkUp/app/__pycache__/
 BulkUp/db.sqlite3
 BulkUp/media/
+BulkUp/app/migrations/

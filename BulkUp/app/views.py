@@ -6,6 +6,8 @@ from . import models
 from .forms import LoginForm
 from .forms import SignupForm
 from .forms import PostingDataForm
+from .forms import SearchForm
+from django.db.models import Q
 
 class Home(APIView):
     def get(self, request, format=None):
@@ -134,6 +136,29 @@ class PostDetail(APIView):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class PostSearch(APIView):
+
+    def post(self, request, format=None):
+
+        form = SearchForm(request.POST)
+
+        if form.is_valid():
+            word = form.data['word']
+            
+            postBox = models.PostingData.objects.filter(
+                Q(title__icontains=word) | Q(message__icontains=word) # Q 객체를 사용해서 검색한다.
+                # title,context 칼럼에 대소문자를 구분하지 않고  단어가 포함되어있는지 (icontains) 검사
+            ).distinct() #중복을 제거한다.
+
+            return render(request, "search.html", {'postBox': postBox })
+
+        return Response(status=status.HTTP_201_CREATED)
+    
+    def get(self, request, format=None):
+
+        form = SearchForm()
+
+        return render(request, "search.html", {'form': form})
 
 class ChangePassword(APIView):
 

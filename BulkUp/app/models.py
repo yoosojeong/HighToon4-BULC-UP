@@ -52,3 +52,7 @@ class PostingData(TimeStampedModel):
 
     class Meta:
         ordering = ['-created_at']
+
+class SearchData(TimeStampedModel):
+
+    word = models.CharField(max_length=80)

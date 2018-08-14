@@ -1,0 +1,13 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }} 
+    <input type="submit">
+</form> 
+
+{% if postBox %}  
+    {% for post in postBox%} 
+        <a href="/home/list/{{ post.id }}/">{{ post.title }}</a> 
+    {% endfor %} 
+{% else %}
+    <p>일치하는 검색결과가 없습니다.</p>
+{% endif %}

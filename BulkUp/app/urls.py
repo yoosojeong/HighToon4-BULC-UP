@@ -47,6 +47,11 @@ urlpatterns = [
         view=views.PostDetail.as_view(),
         name='post_detail',
     ),
+    url(
+        regex=r'^home/list/search/$',
+        view=views.PostSearch.as_view(),
+        name='post_search',
+    ),
     # url(
     #     regex=r'^accounts/login/done$',
     #     view=views.ChangePassword.as_view(),
